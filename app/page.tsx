@@ -306,41 +306,39 @@ export default function Home() {
     const p = personalities[result];
 
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
-        <div style={{ width: "100%", maxWidth: "520px", textAlign: "center" }}>
-          <p style={{ color: p.color, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>
+      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "clamp(1.5rem, 5vw, 3rem) 1.25rem" }}>
+        <div style={{ width: "100%", maxWidth: "480px", textAlign: "center" }}>
+          <p style={{ color: p.color, fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1.25rem" }}>
             Your Coffee Personality
           </p>
 
           {/* Portrait image */}
           <div style={{
-            width: "180px",
-            height: "180px",
+            width: "clamp(140px, 40vw, 200px)",
+            height: "clamp(140px, 40vw, 200px)",
             borderRadius: "50%",
             overflow: "hidden",
             margin: "0 auto 1.5rem",
             border: `3px solid ${p.color}`,
             boxShadow: `0 0 40px ${p.glow}`,
             background: "#1a1a1a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            flexShrink: 0,
           }}>
             <Image
               src={p.image}
               alt={p.name}
-              width={180}
-              height={180}
+              width={200}
+              height={200}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
               onError={() => {}}
             />
           </div>
 
-          <h1 style={{ color: "#ffffff", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 800, marginBottom: "0.75rem" }}>
+          <h1 style={{ color: "#ffffff", fontSize: "clamp(1.5rem, 6vw, 2.25rem)", fontWeight: 800, marginBottom: "0.75rem", lineHeight: 1.2 }}>
             {p.name}
           </h1>
 
-          <p style={{ color: "#888", fontSize: "1rem", marginBottom: "1.5rem", lineHeight: 1.6, fontStyle: "italic" }}>
+          <p style={{ color: "#888", fontSize: "clamp(0.9rem, 3vw, 1rem)", marginBottom: "1.5rem", lineHeight: 1.7, fontStyle: "italic", padding: "0 0.5rem" }}>
             &ldquo;{p.tagline}&rdquo;
           </p>
 
@@ -350,31 +348,34 @@ export default function Home() {
             border: `1px solid ${p.color}`,
             borderRadius: "16px",
             padding: "1.25rem",
-            marginBottom: "2rem",
+            marginBottom: "1.75rem",
             boxShadow: `0 0 30px ${p.glow}`,
           }}>
-            <p style={{ color: "#888", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.25rem" }}>
+            <p style={{ color: "#888", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.4rem" }}>
               Your Perfect Brew
             </p>
-            <p style={{ color: p.color, fontSize: "1.5rem", fontWeight: 800 }}>{p.coffee}</p>
+            <p style={{ color: p.color, fontSize: "clamp(1.25rem, 5vw, 1.5rem)", fontWeight: 800 }}>{p.coffee}</p>
           </div>
 
-          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          {/* Buttons — stacked on mobile */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
             <button
               onClick={handleCopyLink}
               style={{
-                background: copied ? `${p.color}22` : "transparent",
-                color: copied ? p.color : "#fff",
-                border: `1px solid ${copied ? p.color : "#555"}`,
+                background: copied ? `${p.color}22` : p.color,
+                color: "#fff",
+                border: `1px solid ${p.color}`,
                 borderRadius: "9999px",
-                padding: "0.75rem 2rem",
-                fontSize: "0.9rem",
+                padding: "1rem",
+                fontSize: "1rem",
                 cursor: "pointer",
                 transition: "all 0.15s",
-                fontWeight: 600,
+                fontWeight: 700,
+                width: "100%",
+                boxShadow: copied ? "none" : `0 0 20px ${p.glow}`,
               }}
             >
-              {copied ? "✓ Copied!" : "🔗 Share Result"}
+              {copied ? "✓ Copied!" : "🔗 Share My Result"}
             </button>
 
             <button
@@ -384,18 +385,10 @@ export default function Home() {
                 color: "#888",
                 border: "1px solid #333",
                 borderRadius: "9999px",
-                padding: "0.75rem 2rem",
-                fontSize: "0.9rem",
+                padding: "1rem",
+                fontSize: "1rem",
                 cursor: "pointer",
-                transition: "color 0.15s, border-color 0.15s",
-              }}
-              onMouseEnter={e => {
-                (e.target as HTMLElement).style.color = "#fff";
-                (e.target as HTMLElement).style.borderColor = "#666";
-              }}
-              onMouseLeave={e => {
-                (e.target as HTMLElement).style.color = "#888";
-                (e.target as HTMLElement).style.borderColor = "#333";
+                width: "100%",
               }}
             >
               ↺ Retake Quiz
