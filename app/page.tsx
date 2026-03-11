@@ -196,7 +196,7 @@ export default function Home() {
               (e.target as HTMLElement).style.boxShadow = "0 0 30px rgba(239,68,68,0.4)";
             }}
           >
-            Start Quiz →
+            ☕ Start Quiz →
           </button>
         </div>
       </div>
