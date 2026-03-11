@@ -177,8 +177,8 @@ export default function Home() {
 
   if (screen === "intro") {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
-        <div style={{ textAlign: "center", maxWidth: "600px" }}>
+      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(1.5rem, 5vw, 3rem) 1.25rem" }}>
+        <div style={{ textAlign: "center", maxWidth: "600px", width: "100%" }}>
           <p style={{ color: "#f59e0b", fontSize: "0.875rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>
             ☕ Basecamp Coffee
           </p>
@@ -227,10 +227,10 @@ export default function Home() {
     const progress = ((currentQuestion) / questions.length) * 100;
 
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
+      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "clamp(1.5rem, 5vw, 3rem) 1.25rem" }}>
         <div style={{ width: "100%", maxWidth: "640px" }}>
           {/* Progress */}
-          <div style={{ marginBottom: "2rem" }}>
+          <div style={{ marginBottom: "1.75rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
               <span style={{ color: "#666", fontSize: "0.8rem" }}>Question {currentQuestion + 1} of {questions.length}</span>
               <span style={{ color: "#666", fontSize: "0.8rem" }}>{Math.round(progress)}%</span>
@@ -249,12 +249,12 @@ export default function Home() {
           </div>
 
           {/* Question */}
-          <h2 style={{ color: "#ffffff", fontSize: "clamp(1.25rem, 3vw, 1.75rem)", fontWeight: 700, marginBottom: "1.5rem", lineHeight: 1.3 }}>
+          <h2 style={{ color: "#ffffff", fontSize: "clamp(1.2rem, 5vw, 1.75rem)", fontWeight: 700, marginBottom: "1.25rem", lineHeight: 1.35 }}>
             {q.text}
           </h2>
 
           {/* Answers */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
             {q.answers.map((answer, i) => {
               const p = personalities[answer.personality];
               return (
@@ -264,17 +264,18 @@ export default function Home() {
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid #222",
-                    borderRadius: "12px",
-                    padding: "1rem 1.25rem",
+                    borderRadius: "14px",
+                    padding: "1rem 1.1rem",
                     color: "#ccc",
-                    fontSize: "0.95rem",
+                    fontSize: "clamp(0.875rem, 3.5vw, 0.95rem)",
                     cursor: "pointer",
                     textAlign: "left",
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.75rem",
+                    gap: "0.875rem",
                     transition: "background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s",
-                    backdropFilter: "blur(4px)",
+                    width: "100%",
+                    lineHeight: 1.4,
                   }}
                   onMouseEnter={e => {
                     const el = e.currentTarget;
@@ -291,7 +292,7 @@ export default function Home() {
                     el.style.boxShadow = "none";
                   }}
                 >
-                  <span style={{ fontSize: "1.5rem", flexShrink: 0 }}>{answer.emoji}</span>
+                  <span style={{ fontSize: "1.6rem", flexShrink: 0, lineHeight: 1 }}>{answer.emoji}</span>
                   <span>{answer.text}</span>
                 </button>
               );
