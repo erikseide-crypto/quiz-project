@@ -177,18 +177,18 @@ export default function Home() {
 
   if (screen === "intro") {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(1.5rem, 5vw, 3rem) 1.25rem" }}>
-        <div style={{ textAlign: "center", maxWidth: "600px", width: "100%" }}>
-          <p style={{ color: "#f59e0b", fontSize: "0.875rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>
+      <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(2rem, 8vw, 4rem) 1.25rem" }}>
+        <div style={{ textAlign: "center", maxWidth: "500px", width: "100%" }}>
+          <p style={{ color: "#f59e0b", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
             ☕ Basecamp Coffee
           </p>
-          <h1 style={{ color: "#ffffff", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.1, marginBottom: "1.5rem" }}>
+          <h1 style={{ color: "#ffffff", fontSize: "clamp(2.25rem, 10vw, 3.5rem)", fontWeight: 800, lineHeight: 1.05, marginBottom: "1.25rem" }}>
             What&apos;s Your<br />
             <span style={{ background: "linear-gradient(135deg, #ef4444, #ec4899, #8b5cf6, #f59e0b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              Coffee Personality?
+              Coffee<br />Personality?
             </span>
           </h1>
-          <p style={{ color: "#888", fontSize: "1.125rem", marginBottom: "2.5rem", lineHeight: 1.6 }}>
+          <p style={{ color: "#666", fontSize: "clamp(0.95rem, 3.5vw, 1.1rem)", marginBottom: "2.5rem", lineHeight: 1.7, padding: "0 0.5rem" }}>
             Answer 6 quick questions and we&apos;ll reveal which brew was made for you.
           </p>
           <button
@@ -198,16 +198,18 @@ export default function Home() {
               color: "#fff",
               border: "none",
               borderRadius: "9999px",
-              padding: "1rem 2.5rem",
+              padding: "1.1rem 2rem",
               fontSize: "1rem",
               fontWeight: 700,
               cursor: "pointer",
               letterSpacing: "0.05em",
               boxShadow: "0 0 30px rgba(239,68,68,0.4)",
               transition: "transform 0.15s, box-shadow 0.15s",
+              width: "100%",
+              maxWidth: "280px",
             }}
             onMouseEnter={e => {
-              (e.target as HTMLElement).style.transform = "scale(1.05)";
+              (e.target as HTMLElement).style.transform = "scale(1.03)";
               (e.target as HTMLElement).style.boxShadow = "0 0 50px rgba(239,68,68,0.6)";
             }}
             onMouseLeave={e => {
