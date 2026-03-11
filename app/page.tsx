@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 type PersonalityKey = "bold-adventurer" | "social-butterfly" | "artisan-snob" | "indulgent-treat";
@@ -129,6 +129,16 @@ export default function Home() {
     "indulgent-treat": 0,
   });
   const [result, setResult] = useState<PersonalityKey | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const r = params.get("result") as PersonalityKey | null;
+    if (r && r in personalities) {
+      setResult(r);
+      setScreen("result");
+    }
+  }, []);
 
   function handleStart() {
     setScreen("quiz");
@@ -149,11 +159,20 @@ export default function Home() {
       );
       setResult(winner);
       setScreen("result");
+      window.history.replaceState({}, "", `?result=${winner}`);
     }
   }
 
   function handleRetake() {
     setScreen("intro");
+    setResult(null);
+    window.history.replaceState({}, "", window.location.pathname);
+  }
+
+  function handleCopyLink() {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   if (screen === "intro") {
@@ -340,29 +359,48 @@ export default function Home() {
             <p style={{ color: p.color, fontSize: "1.5rem", fontWeight: 800 }}>{p.coffee}</p>
           </div>
 
-          <button
-            onClick={handleRetake}
-            style={{
-              background: "transparent",
-              color: "#888",
-              border: "1px solid #333",
-              borderRadius: "9999px",
-              padding: "0.75rem 2rem",
-              fontSize: "0.9rem",
-              cursor: "pointer",
-              transition: "color 0.15s, border-color 0.15s",
-            }}
-            onMouseEnter={e => {
-              (e.target as HTMLElement).style.color = "#fff";
-              (e.target as HTMLElement).style.borderColor = "#666";
-            }}
-            onMouseLeave={e => {
-              (e.target as HTMLElement).style.color = "#888";
-              (e.target as HTMLElement).style.borderColor = "#333";
-            }}
-          >
-            ↺ Retake Quiz
-          </button>
+          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+            <button
+              onClick={handleCopyLink}
+              style={{
+                background: copied ? `${p.color}22` : "transparent",
+                color: copied ? p.color : "#fff",
+                border: `1px solid ${copied ? p.color : "#555"}`,
+                borderRadius: "9999px",
+                padding: "0.75rem 2rem",
+                fontSize: "0.9rem",
+                cursor: "pointer",
+                transition: "all 0.15s",
+                fontWeight: 600,
+              }}
+            >
+              {copied ? "✓ Copied!" : "🔗 Share Result"}
+            </button>
+
+            <button
+              onClick={handleRetake}
+              style={{
+                background: "transparent",
+                color: "#888",
+                border: "1px solid #333",
+                borderRadius: "9999px",
+                padding: "0.75rem 2rem",
+                fontSize: "0.9rem",
+                cursor: "pointer",
+                transition: "color 0.15s, border-color 0.15s",
+              }}
+              onMouseEnter={e => {
+                (e.target as HTMLElement).style.color = "#fff";
+                (e.target as HTMLElement).style.borderColor = "#666";
+              }}
+              onMouseLeave={e => {
+                (e.target as HTMLElement).style.color = "#888";
+                (e.target as HTMLElement).style.borderColor = "#333";
+              }}
+            >
+              ↺ Retake Quiz
+            </button>
+          </div>
         </div>
       </div>
     );
